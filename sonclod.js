@@ -3,6 +3,29 @@ $(function(){
   var picksOnly = false;
   var players = {};
 
+  var volume = 1.0;
+
+  function setPlaying(p) {
+    var np = $("#np");
+    playing = p;
+    if (playing === null) {
+      np.empty();
+      np.text("(silence)");
+    } else {
+      var a = $("<a>");
+      a.attr("href", p.getAnchor());
+      a.text(p.getTitle());
+      np.empty();
+      np.append(a);
+    }
+  }
+
+  function setVolume(v) {
+    volume = Math.pow(2.0, v) - 1.0;
+    if (playing !== null)
+      playing.setVolume(volume);
+  }
+
   function timeToText(n) {
     var mins = Math.floor(n / 60);
     var secs = Math.floor(n % 60);
@@ -33,17 +56,13 @@ $(function(){
 
     self.isPick = elem.parent().hasClass("pick");
 
-    self.getId = function() {
-      return id;
-    }
+    self.getTitle = function() { return $("#n"+id).text(); }
+    self.getId = function() { return id; }
+    self.getAnchor = function() { return "#s"+id; }
 
-    self.setNext = function(e){
-      next = e;
-    }
+    self.setNext = function(e) { next = e; }
 
-    self.isPlaying = function() {
-      return playing == self;
-    }
+    self.isPlaying = function() { return playing == self; }
 
     self.updateTs = function() {
       ts.text(
@@ -55,15 +74,25 @@ $(function(){
     }
 
     self.stopPlayback = function(){
+      var audio = $("#"+id);
+
       audio.trigger("pause");
       audio.prop("currentTime",0);
       if (playing == self)
-        playing = null;
+        setPlaying(null);
       text.text(">> PLAY THIS ONE >> ");
       elem.removeClass("playing");
     }
 
+    self.setVolume = function(v) {
+      var audio = $("#"+id);
+
+      audio.prop("volume", v);
+    }
+
     self.play = function(auto){
+      var audio = $("#"+id);
+
       if (!self.isPick && picksOnly && auto) {
         next.play(true);
         return;
@@ -71,9 +100,9 @@ $(function(){
 
       if (playing !== null)
         playing.stopPlayback();
-
-      playing = self;
+      setPlaying(self);
       audio.trigger("play");
+      audio.prop("volume", volume);
       text.text("!!! PLAYING :DD !!! ");
       elem.addClass("playing");
     }
@@ -121,4 +150,16 @@ $(function(){
   if (window.location.hash.length > 2) {
     players[window.location.hash.substr(2)].play();
   }
+
+  $(".volnotch").click(function(e){
+    var idx = $(this).index();
+    $(".volnotch").each(function(i,e){
+      if (i <= idx)
+        $(this).addClass("activated");
+      else
+        $(this).removeClass("activated");
+    });
+    setVolume(idx/($(".volnotch").size()-1));
+  });
+  $(".volnotch").addClass("activated");
 });

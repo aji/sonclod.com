@@ -62,16 +62,52 @@ audio { width: 100%; }
 .pick {
 	background-color: #111;
 }
-#picksonly {
-	font-size: 18pt;
-	padding: 0.5em;
+.ctlbar {
+	font-size: 16pt;
+	padding: 0.5em 0.5em 0;
 	position: fixed;
-	top: 0;
-	right: 0;
+	bottom: 0;
+	right: 30px;
 	background-color: #111;
-	border-width: 0 0 2px 2px;
+	border: solid #0f0;
+	border-width: 2px 2px 0 2px;
+}
+.ctlbar .icon {
+	color: #fff;
+	font-size: 24pt;
+	font-weight: bold;
+	max-height: 16pt;
+	position: relative;
+	top: 4pt;
+}
+#picksonly {
+	color: #ff0;
+	text-decoration: none;
+	max-width: 32pt;
+	width: 32pt;
+	max-height: 32pt;
+	height: 32pt;
+	display: inline-block;
+	text-align: center;
+	position: relative;
+	padding: 0;
+}
+#picksonly span.only {
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	margin: 0;
+	font-size: 10pt;
+	display: inline-block;
+	vertical-align: middle;
 }
 #picksonly:hover {
-	color: #8f8;
 	background-color: #222;
+}
+#volctl .volnotch {
+	color: #333;
+	cursor: pointer;
+}
+#volctl .activated {
+	color: #fff;
 }
