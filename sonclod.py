@@ -5,6 +5,8 @@ import os
 import re
 import json
 
+import slimit
+
 INTRO_PARAGRAPH = '''
 <p>Welcome to sonclod.com! This is a collection of various MP3s rendered from
 aji's BotB OHC entries. The tracks are chronologically ordered.  I've also
@@ -14,6 +16,9 @@ visit the OHC entry's page on BotB.</p>
 
 <p>I hope you enjoy my tunes!</p>
 '''
+
+def cssmin(css):
+    return ' '.join(x.strip() for x in css.split())
 
 class Entry(object):
     def __init__(self, name, id, path, page, obj):
@@ -34,9 +39,10 @@ def gen_index(f, ents):
     f.write('<meta charset="UTF-8">\n')
     f.write('<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>\n')
     with open('sonclod.js') as js:
-        f.write('<script>{}</script>\n'.format(js.read()))
+        minjs = slimit.minify(js.read(), mangle=True)
+        f.write('<script>{}</script>\n'.format(minjs))
     with open('style.css') as css:
-        f.write('<style>{}</style>\n'.format(css.read()))
+        f.write('<style>{}</style>\n'.format(cssmin(css.read())))
     f.write('</head><body>\n')
     f.write('<h1>aji\'s Sonclod</h1>\n')
     f.write('<div class="intro">{}</div>\n'.format(INTRO_PARAGRAPH))
