@@ -28,7 +28,8 @@ class Entry(object):
         f.write('<div class="title">')
         if 'pick' in self.obj:
             f.write('<span class="pick">&#x2605; aji\'s pick &#x2605;</span>')
-        f.write(' {} <a href="{}">(on BotB)</a>'.format(self.name, self.page))
+        f.write(' {} <a href="{}" target="_blank">(on BotB)</a>'
+                .format(self.name, self.page))
         f.write('</div>\n')
         f.write('<audio id="{}" preload="none">\n'.format(self.id))
         f.write('<source src="'+self.path+'" type="audio/mpeg"/>\n')
