@@ -141,8 +141,12 @@ $(function(){
   }
 
   $("#picksonly").click(function(e){
-    $(".nopick").fadeToggle();
-    picksOnly = !$(".nopick").is(":visible");
+    picksOnly = !picksOnly;
+    if (picksOnly) {
+      $(".nopick").fadeOut();
+    } else {
+      $(".nopick").fadeIn();
+    }
     return false;
   });
 

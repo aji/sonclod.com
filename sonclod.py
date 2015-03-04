@@ -46,6 +46,10 @@ def gen_index(f, ents):
     f.write('</head><body>\n')
     f.write('<h1>aji\'s Sonclod</h1>\n')
     f.write('<div class="intro">{}</div>\n'.format(INTRO_PARAGRAPH))
+    f.write('<script>\n')
+    for e in ents:
+        e.gen(f)
+    f.write('</script>')
     f.write('<div class="ctlbar">\n')
     f.write('<span id="volctl"><span class="icon">&#x1f508;</span>:')
     f.write('<span><span class="volnotch">&#x1f6c7;</span>')
@@ -60,10 +64,6 @@ def gen_index(f, ents):
     f.write('<a href="#" id="picksonly">')
     f.write('<span class="only">PICKS<br/>ONLY</span></a>\n')
     f.write('</div>\n')
-    f.write('<script>\n')
-    for e in ents:
-        e.gen(f)
-    f.write('</script>')
     f.write('</body></html>\n')
 
 def page_name(ent):
