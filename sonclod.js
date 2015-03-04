@@ -141,7 +141,7 @@ $(function(){
   }
 
   $("#picksonly").click(function(e){
-    $(".nopick").toggle();
+    $(".nopick").fadeToggle();
     picksOnly = !$(".nopick").is(":visible");
     return false;
   });
