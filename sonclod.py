@@ -28,7 +28,7 @@ class Entry(object):
         self.page = page
         self.obj  = obj
     def gen(self, f):
-        f.write('<script>genEntry({},{},{},{},{})</script>\n'.format(
+        f.write('genEntry({},{},{},{},{});\n'.format(
             repr(self.id), repr(self.name), repr(self.page), repr(self.path),
             'true' if 'pick' in self.obj else 'false'
             ))
@@ -60,8 +60,10 @@ def gen_index(f, ents):
     f.write('<a href="#" id="picksonly">')
     f.write('<span class="only">PICKS<br/>ONLY</span></a>\n')
     f.write('</div>\n')
+    f.write('<script>\n')
     for e in ents:
         e.gen(f)
+    f.write('</script>')
     f.write('</body></html>\n')
 
 def page_name(ent):
