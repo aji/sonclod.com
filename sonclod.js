@@ -163,3 +163,51 @@ $(function(){
   });
   $(".volnotch").addClass("activated");
 });
+
+function genEntry(id, name, page, path, pick) {
+  var anchor =       $("<a>").attr("id","s"+id);
+
+  var entry  =     $("<div>").addClass("entry")
+                             .addClass(pick?"pick":"nopick");
+  var title  =     $("<div>").addClass("title");
+  var tlink  =       $("<a>").addClass("permalink")
+                             .attr("href","#s"+id)
+                             .html("&para;");
+  var star   =    $("<span>").addClass("pick")
+                             .html("&#x2605; aji's pick &#x2605;");
+  var ttext  =    $("<span>").attr("id","n"+id)
+                             .text(name);
+  var botb   =       $("<a>").attr("href",page)
+                             .attr("target","_blank")
+                             .text("(on BotB)");
+  var audio  =   $("<audio>").attr("id",id)
+                             .attr("preload","none")
+                             .text("no <audio> support bro :(");
+  var source =  $("<source>").attr("src",path)
+                             .attr("type","audio/mpeg");
+  var player =     $("<div>").addClass("player")
+                             .text(id);
+  var dl     =       $("<a>").attr("href",path)
+                             .addClass("download")
+                             .text("vvv DOWNLOAD IT vvv");
+
+  title.append(tlink);
+  title.append(' ')
+  if (pick) title.append(star);
+  title.append(ttext);
+  title.append(' ')
+  title.append(botb);
+
+  audio.append(source);
+
+  entry.append(title);
+  entry.append(audio);
+  entry.append(player);
+  entry.append(dl);
+
+  var container = $("<div>");
+  container.append(anchor);
+  container.append(entry);
+
+  document.write(container.html());
+}

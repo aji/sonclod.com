@@ -23,24 +23,10 @@ class Entry(object):
         self.page = page
         self.obj  = obj
     def gen(self, f):
-        f.write('<a id="s{}"></a>'.format(self.id))
-        f.write('<div class="entry {}">\n'.format(
-            'pick' if 'pick' in self.obj else 'nopick'))
-        f.write('<div class="title">')
-        f.write('<a class="permalink" href="#s{}">&para;</a>'.format(self.id))
-        if 'pick' in self.obj:
-            f.write('<span class="pick">&#x2605; aji\'s pick &#x2605;</span>')
-        f.write(' <span id="n{}">{}</span> '.format(self.id, self.name))
-        f.write('<a href="{}" target="_blank">(on BotB)</a>'.format(self.page))
-        f.write('</div>\n')
-        f.write('<audio id="{}" preload="none">\n'.format(self.id))
-        f.write('<source src="'+self.path+'" type="audio/mpeg"/>\n')
-        f.write('YOUR BROWSER DOES NOT SUPPORT &lt;AUDIO/&gt; LMAO')
-        f.write('</audio>\n')
-        f.write('<div class="player">{}</div>\n'.format(self.id))
-        f.write('<a href="{}" class="download">vvv DOWNLOAD IT vvv</a>\n'
-                .format(self.path));
-        f.write('</div>\n')
+        f.write('<script>genEntry({},{},{},{},{})</script>\n'.format(
+            repr(self.id), repr(self.name), repr(self.page), repr(self.path),
+            'true' if 'pick' in self.obj else 'false'
+            ))
 
 def gen_index(f, ents):
     f.write('<!DOCTYPE html>\n')
