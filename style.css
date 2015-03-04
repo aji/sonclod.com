@@ -1,0 +1,53 @@
+body {
+	background: #000;
+	color: #0f0;
+	font-family: monospace;
+}
+.intro {
+	font-family: sans-serif;
+	margin: 2em 0;
+	color: #cfa;
+	font-size: 18pt;
+}
+.entry {
+	background: #000;
+	padding: 20px;
+	border-top: 1px solid #0f0;
+	color: #080;
+}
+.entry .title {
+	color: #8f0;
+	font-weight: bold;
+	font-size: 200%;
+	border-bottom: 1px dotted #040;
+}
+.entry .title .pick {
+	color: #ff0;
+	float: right;
+	margin-top: 0.25em;
+	font-size: 75%;
+	font-family: sans-serif;
+}
+.entry .title a {
+	color: #0f8;
+	font-weight: bold;
+	font-size: 50%;
+}
+.entry a {
+	color: #0f8;
+}
+.entry a:hover {
+	color: #0ff;
+}
+.entry a:visited {
+	color: #3a6;
+}
+.entry .player {
+	cursor: pointer;
+	font-size: 200%;
+	clear: both;
+}
+.playing {
+	color: #0ff;
+}
+audio { width: 100%; }
