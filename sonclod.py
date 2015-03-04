@@ -46,9 +46,11 @@ def gen_index(f, ents):
     f.write('<!DOCTYPE html>\n')
     f.write('<html><head><title>aji\'s Sonclod</title>\n')
     f.write('<meta charset="UTF-8">\n')
-    f.write('<link rel="stylesheet" href="style.css">\n')
     f.write('<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>\n')
-    f.write('<script src="sonclod.js"></script>\n')
+    with open('sonclod.js') as js:
+        f.write('<script>{}</script>\n'.format(js.read()))
+    with open('style.css') as css:
+        f.write('<style>{}</style>\n'.format(css.read()))
     f.write('</head><body>\n')
     f.write('<h1>aji\'s Sonclod</h1>\n')
     f.write('<div class="intro">{}</div>\n'.format(INTRO_PARAGRAPH))
