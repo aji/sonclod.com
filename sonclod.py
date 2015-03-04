@@ -23,8 +23,8 @@ class Entry(object):
         self.page = page
         self.obj  = obj
     def gen(self, f):
-        f.write('<div class="entry{}">\n'.format(
-            ' pick' if 'pick' in self.obj else ''))
+        f.write('<div class="entry {}">\n'.format(
+            'pick' if 'pick' in self.obj else 'nopick'))
         f.write('<div class="title">')
         if 'pick' in self.obj:
             f.write('<span class="pick">&#x2605; aji\'s pick &#x2605;</span>')
