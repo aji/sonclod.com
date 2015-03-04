@@ -1,5 +1,7 @@
 $(function(){
   var playing = null;
+  var picksOnly = false;
+  var players = {};
 
   function timeToText(n) {
     var mins = Math.floor(n / 60);
@@ -16,6 +18,7 @@ $(function(){
   function Player(elem, audio) {
     var self = this;
     var next = null;
+    var id   = elem.text();
     var text = $("<span>");
     var ts   = $("<span>");
 
@@ -27,6 +30,12 @@ $(function(){
 
     text.text(">> PLAY THIS ONE >> ");
     ts.text("-:--/-:--");
+
+    self.isPick = elem.parent().hasClass("pick");
+
+    self.getId = function() {
+      return id;
+    }
 
     self.setNext = function(e){
       next = e;
@@ -45,7 +54,7 @@ $(function(){
         );
     }
 
-    self.stop = function stop(){
+    self.stopPlayback = function(){
       audio.trigger("pause");
       audio.prop("currentTime",0);
       if (playing == self)
@@ -54,9 +63,14 @@ $(function(){
       elem.removeClass("playing");
     }
 
-    self.play = function play(){
+    self.play = function(auto){
+      if (!self.isPick && picksOnly && auto) {
+        next.play(true);
+        return;
+      }
+
       if (playing !== null)
-        playing.stop();
+        playing.stopPlayback();
 
       playing = self;
       audio.trigger("play");
@@ -65,16 +79,16 @@ $(function(){
     }
 
     audio.on("ended",function(e){
-      self.stop();
+      self.stopPlayback();
       if (next !== null)
-        next.play();
+        next.play(true);
     });
 
     elem.on("click",function(e){
       if (playing == self)
-        self.stop();
+        self.stopPlayback();
       else
-        self.play();
+        self.play(false);
     });
 
     audio.on("timeupdate",function(e){
@@ -93,8 +107,18 @@ $(function(){
       if (last !== null)
         last.setNext(p);
       last = p;
+      players[p.getId()] = p;
     });
   }
 
+  $("#picksonly").click(function(e){
+    $(".nopick").toggle();
+    picksOnly = !$(".nopick").is(":visible");
+    return false;
+  });
+
   initPlayers();
+  if (window.location.hash.length > 2) {
+    players[window.location.hash.substr(2)].play();
+  }
 });

@@ -23,9 +23,11 @@ class Entry(object):
         self.page = page
         self.obj  = obj
     def gen(self, f):
+        f.write('<a id="s{}"></a>'.format(self.id))
         f.write('<div class="entry {}">\n'.format(
             'pick' if 'pick' in self.obj else 'nopick'))
         f.write('<div class="title">')
+        f.write('<a class="permalink" href="#s{}">&para;</a>'.format(self.id))
         if 'pick' in self.obj:
             f.write('<span class="pick">&#x2605; aji\'s pick &#x2605;</span>')
         f.write(' {} <a href="{}" target="_blank">(on BotB)</a>'
@@ -43,12 +45,14 @@ class Entry(object):
 def gen_index(f, ents):
     f.write('<!DOCTYPE html>\n')
     f.write('<html><head><title>aji\'s Sonclod</title>\n')
+    f.write('<meta charset="UTF-8">\n')
     f.write('<link rel="stylesheet" href="style.css">\n')
     f.write('<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>\n')
     f.write('<script src="sonclod.js"></script>\n')
     f.write('</head><body>\n')
     f.write('<h1>aji\'s Sonclod</h1>\n')
     f.write('<div class="intro">{}</div>\n'.format(INTRO_PARAGRAPH))
+    f.write('<a href="#" id="picksonly">Toggle Picks Only</a>\n')
     for e in ents:
         e.gen(f)
     f.write('</body></html>\n')

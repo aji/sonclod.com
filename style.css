@@ -21,6 +21,14 @@ body {
 	font-size: 200%;
 	border-bottom: 1px dotted #040;
 }
+.entry .title .permalink {
+	font-size: 100%;
+	color: #333;
+	text-decoration: none;
+}
+.entry .title .permalink:hover {
+	color: #fff;
+}
 .entry .title .pick {
 	color: #ff0;
 	float: right;
@@ -33,13 +41,13 @@ body {
 	font-weight: bold;
 	font-size: 50%;
 }
-.entry a {
+a {
 	color: #0f8;
 }
-.entry a:hover {
+a:hover {
 	color: #0ff;
 }
-.entry a:visited {
+a:visited {
 	color: #3a6;
 }
 .entry .player {
@@ -53,4 +61,17 @@ body {
 audio { width: 100%; }
 .pick {
 	background-color: #111;
+}
+#picksonly {
+	font-size: 18pt;
+	padding: 0.5em;
+	position: fixed;
+	top: 0;
+	right: 0;
+	background-color: #111;
+	border-width: 0 0 2px 2px;
+}
+#picksonly:hover {
+	color: #8f8;
+	background-color: #222;
 }
