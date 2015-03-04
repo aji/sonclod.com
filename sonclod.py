@@ -62,7 +62,7 @@ def page_name(ent):
     num, name, ext = m.groups()
     name += '.' + ext.split('.')[0]
     name = name.replace(' ', '+')
-    return 'http://battleofthebits.org/arena/Entry/{}/{}'.format(name, num)
+    return 'http://battleofthebits.org/arena/Entry/-/{}'.format(num)
 
 def path_name(name, num):
     def f(c):
