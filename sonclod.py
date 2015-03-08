@@ -96,6 +96,7 @@ for ent in reversed(sorted(os.listdir('s'))):
     print(e.path)
     if not os.path.exists(e.path):
         shutil.copy('s/'+ent, e.path)
+    os.chmod(e.path, 0o644)
     ents.append(e)
 
 with open('index.html', 'w') as f:
