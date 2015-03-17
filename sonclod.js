@@ -176,7 +176,7 @@ function genEntry(id, name, page, path, pick) {
   var title  =     $("<div>").addClass("title");
   var tlink  =       $("<a>").addClass("permalink")
                              .attr("href","#s"+id)
-                             .html("&para;");
+                             .html("&#x1f517;");
   var star   =    $("<span>").addClass("pick")
                              .html("&#x2605; aji's pick &#x2605;");
   var ttext  =    $("<span>").attr("id","n"+id)
