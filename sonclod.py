@@ -22,7 +22,7 @@ def cssmin(css):
 
 class Entry(object):
     def __init__(self, name, id, path, page, obj):
-        self.name = name
+        self.name = obj.get('name', name)
         self.id   = id
         self.path = path
         self.page = page
